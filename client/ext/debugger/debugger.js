@@ -15,6 +15,7 @@ var fs = require("ext/filesystem/filesystem");
 var noderunner = require("ext/noderunner/noderunner");
 var markup = require("text!ext/debugger/debugger.xml");
 var inspector = require("ext/debugger/inspector");
+var settings = require("ext/settings/settings");
 
 module.exports = ext.register("ext/debugger/debugger", {
     name    : "Debug",
@@ -51,6 +52,14 @@ module.exports = ext.register("ext/debugger/debugger", {
             return false;
         });
         
+        ide.addEventListener("loadsettings", function (e) {
+            // restore the breakpoints from the IDE settings
+            var bpFromIde = e.model.data.selectSingleNode("//breakpoints");
+            if (bpFromIde) {
+                mdlDbgBreakpoints.load(bpFromIde);
+            }
+        });
+        
         stDebugProcessRunning.addEventListener("activate", function() {
             _self.activate();
         });
@@ -69,28 +78,37 @@ module.exports = ext.register("ext/debugger/debugger", {
         });
         
         var name = "ext/debugger/debugger"; //this.name
-        
+
         dock.addDockable({
-            hidden  : false,
-            buttons : [
-                { caption: "Call Stack", ext : [name, "dbgCallStack"] }
-            ]
-        });
-        dock.addDockable({
-            hidden  : false,
-            buttons : [
-                { caption: "Interactive", ext : [name, "dbInteractive"] },
-                { caption: "Variables", ext : [name, "dbgVariable"] },
-                { caption: "Breakpoints", ext : [name, "dbgBreakpoints"] }
+            expanded : false,
+            hidden : false,
+            width : 300,
+            barNum  : 0,
+            sections : [
+                {
+                    hidden  : false,
+                    buttons : [
+                        { caption: "Interactive", ext : [name, "dbInteractive"]},
+                        { caption: "Variables", ext : [name, "dbgVariable"]},
+                        { caption: "Breakpoints", ext : [name, "dbgBreakpoints"]}
+                    ]
+                },
+                {
+                    hidden  : false,
+                    buttons : [
+                        { caption: "Call Stack", ext : [name, "dbgCallStack"]}
+                    ]
+                }
+                
             ]
         });
 
         dock.register(name, "dbgCallStack", {
             menu : "Debugger/Call Stack",
             primary : {
-                backgroundImage: ide.staticPrefix + "/style/images/debugicons.png",
-                defaultState: { x: -6, y: -217 },
-                activeState: { x: -6, y: -217 }
+                backgroundImage: "/static/style/images/debugicons.png",
+                defaultState: { x: -8, y: -47 },
+                activeState: { x: -8, y: -47 }
             }
         }, function(type) {
             ext.initExtension(_self);            
@@ -100,9 +118,9 @@ module.exports = ext.register("ext/debugger/debugger", {
         dock.register(name, "dbInteractive", {
             menu : "Debugger/Interactive",
             primary : {
-                backgroundImage: ide.staticPrefix + "/style/images/debugicons.png",
-                defaultState: { x: -7, y: -310 },
-                activeState: { x: -7, y: -310 }
+                backgroundImage: "/static/style/images/debugicons.png",
+                defaultState: { x: -8, y: -130 },
+                activeState: { x: -8, y: -130 }
             }
         }, function(type) {
             ext.initExtension(_self);
@@ -112,16 +130,16 @@ module.exports = ext.register("ext/debugger/debugger", {
         dock.register(name, "dbgVariable", {
             menu : "Debugger/Variables",
             primary : {
-                backgroundImage: ide.staticPrefix + "/style/images/debugicons.png",
-                defaultState: { x: -6, y: -261 },
-                activeState: { x: -6, y: -261 }
+                backgroundImage: "/static/style/images/debugicons.png",
+                defaultState: { x: -8, y: -174 },
+                activeState: { x: -8, y: -174 }
             }
         }, function(type) {
             ext.initExtension(_self);
             
             // when visible -> make sure to refresh the grid
             dbgVariable.addEventListener("prop.visible", function(e) {
-                if (e.value) {
+                if (e.value && self["dgVars"]) {
                     dgVars.reload();
                 }
             });
@@ -132,9 +150,9 @@ module.exports = ext.register("ext/debugger/debugger", {
         dock.register(name, "dbgBreakpoints", {
             menu : "Debugger/Breakpoints",
             primary : {
-                backgroundImage: ide.staticPrefix + "/style/images/debugicons.png",
-                defaultState: { x: -6, y: -360 },
-                activeState: { x: -6, y: -360 }
+                backgroundImage: "/static/style/images/debugicons.png",
+                defaultState: { x: -8, y: -88 },
+                activeState: { x: -8, y: -88 }
             }
         }, function(type) {
             ext.initExtension(_self);
@@ -170,8 +188,8 @@ module.exports = ext.register("ext/debugger/debugger", {
             _self.$syncTree();
         });
         mdlDbgSources.addEventListener("update", function(e) {
-            if (e.action != "add")
-                return;
+            if (e.action !== "add") return;
+            
             // TODO: optimize this!
             _self.$syncTree();
         });
@@ -202,6 +220,31 @@ module.exports = ext.register("ext/debugger/debugger", {
                     .showDebugFile(e.selected.getAttribute("scriptid"));
             });
         });
+        
+        mdlDbgBreakpoints.addEventListener("update", function(e) {
+            // when the breakpoint model is updated
+            // get the current IDE settings
+            var settingsMdl = settings.model.data;
+            // create a new element
+            var node = settingsMdl.ownerDocument.createElement("breakpoints");
+            
+            // find out all the breakpoints in the breakpoint model and iterate over them
+            var breakpoints = e.currentTarget.data.selectNodes("//breakpoint");
+            for (var ix = 0; ix < breakpoints.length; ix++) {
+                // clone and add to our new element
+                var cln = breakpoints[ix].cloneNode();
+                node.appendChild(cln);
+            }
+            
+            // if there is already a breakpoints section in the IDE settings remove it
+            var bpInSettingsFile = settingsMdl.selectSingleNode("//breakpoints");
+            if (bpInSettingsFile) {
+                bpInSettingsFile.parentNode.removeChild(bpInSettingsFile);
+            }
+            
+            // then append the current breakpoints to the IDE settings, tah dah
+            settingsMdl.appendChild(node);
+        });
 
         ide.addEventListener("afterfilesave", function(e) {
             var node = e.node;
@@ -217,6 +260,16 @@ module.exports = ext.register("ext/debugger/debugger", {
             dbg.changeLive(scriptId, NODE_PREFIX + value + NODE_POSTFIX, false, function(e) {
                 //console.log("v8 updated", e);
             });
+        });
+        
+        // we're subsribing to the 'running active' prop
+        // this property indicates whether the debugger is actually running (when on a break this value is false)
+        stRunning.addEventListener("prop.active", function (e) {
+            // if we are really running (so not on a break or something)
+            if (e.value) {
+                // we clear out mdlDbgStack
+                mdlDbgStack.load("<frames></frames>");
+            }
         });
     },
 

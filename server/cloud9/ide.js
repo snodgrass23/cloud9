@@ -119,6 +119,7 @@ Ide.DEFAULT_PLUGINS = [
     "ext/console/console",
     "ext/tabbehaviors/tabbehaviors",
     "ext/keybindings/keybindings",
+    "ext/keybindings_default/keybindings_default",
     "ext/watcher/watcher",
     "ext/dragdrop/dragdrop",
     "ext/beautify/beautify",
@@ -127,6 +128,8 @@ Ide.DEFAULT_PLUGINS = [
     "ext/zen/zen",
     "ext/codecomplete/codecomplete",
     "ext/vim/vim",
+    "ext/guidedtour/guidedtour",
+    "ext/quickstart/quickstart",
     "ext/jslanguage/jslanguage",
     "ext/autotest/autotest"
     //"ext/acebugs/acebugs"

@@ -4,8 +4,8 @@
  */
 require("../../support/paths");
 
-var Connect = require("connect");
-var MemoryStore = require("connect/middleware/session/memory");
+var Connect = require("connect/lib/connect");
+var MemoryStore = require("connect/lib/connect/middleware/session/memory");
 var IO = require("socket.io");
 var Fs = require("fs");
 var Path = require("path");
@@ -91,7 +91,7 @@ exports.main = function(options) {
     }));
     
     server.use(ideProvider(projectDir, server, sessionStore));
-    server.use(middleware.staticProvider(Path.normalize(__dirname + "/../../support"), "/static/support"));
+    server.use(middleware.staticProvider(Path.normalize(__dirname + "/../../node_modules"), "/static/support"));
     server.use(middleware.staticProvider(Path.normalize(__dirname + "/../../client"), "/static"));
 
     //obfuscate process rights if configured

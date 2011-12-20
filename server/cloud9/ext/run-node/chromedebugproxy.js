@@ -5,9 +5,9 @@
 
 var net = require("net");
 var sys = require("sys");
-var NodeSocket = require("v8debug/NodeSocket");
-var ChromeDebugMessageStream = require("v8debug/ChromeDebugMessageStream");
-var DevToolsMessage = require("v8debug/DevToolsMessage");
+var NodeSocket = require("lib-v8debug/lib/v8debug/NodeSocket");
+var ChromeDebugMessageStream = require("lib-v8debug/lib/v8debug/ChromeDebugMessageStream");
+var DevToolsMessage = require("lib-v8debug/lib/v8debug/DevToolsMessage");
 
 
 var DebugProxy = module.exports = function(port) {

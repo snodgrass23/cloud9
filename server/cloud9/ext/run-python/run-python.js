@@ -6,9 +6,9 @@
  */
 var Path             = require("path"),
     Spawn            = require("child_process").spawn,
-    Plugin           = require("cloud9/plugin"),
+    Plugin           = require("../../plugin"),
     sys              = require("sys"),
-    netutil          = require("cloud9/netutil");
+    netutil          = require("../../netutil");
 
 var PythonRuntimePlugin = module.exports = function(ide, workspace) {
     this.ide = ide;

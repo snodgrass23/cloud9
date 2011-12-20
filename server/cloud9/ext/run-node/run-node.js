@@ -8,9 +8,9 @@ var Path             = require("path"),
     Spawn            = require("child_process").spawn,
     NodeDebugProxy   = require("./nodedebugproxy"),
     ChromeDebugProxy = require("./chromedebugproxy"),
-    Plugin           = require("cloud9/plugin"),
+    Plugin           = require("../../plugin"),
     sys              = require("sys"),
-    netutil          = require("cloud9/netutil");
+    netutil          = require("../../netutil");
 
 var NodeRuntimePlugin = module.exports = function(ide, workspace) {
     this.ide = ide;

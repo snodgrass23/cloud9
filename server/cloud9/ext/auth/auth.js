@@ -4,7 +4,7 @@
  * @copyright 2010, Ajax.org B.V.
  * @license GPLv3 <http://www.gnu.org/licenses/gpl.txt>
  */
-var Plugin = require("cloud9/plugin");
+var Plugin = require("../../plugin");
 var sys = require("sys");
 
 var AuthPlugin = module.exports = function(ide, workspace) {

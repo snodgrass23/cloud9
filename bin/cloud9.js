@@ -7,7 +7,7 @@ require ("../support/paths");
 
 var Sys = require("sys"),
     Fs  = require("fs"),
-    Parser = require("cloud9/optparse");
+    Parser = require("../server/cloud9/optparse");
 
 if (parseInt(process.version.split(".")[1]) < 2) {
     Sys.puts("ERROR: Cloud9 IDE requires node version 0.2.x or higher, but you are using " + process.version);
@@ -39,7 +39,7 @@ if (options.config) {
 
 var version = options.version = JSON.parse(Fs.readFileSync(__dirname + "/../package.json")).version;
 
-require("cloud9").main(options);
+require("../server/cloud9").main(options);
 
 Sys.puts("\n\n                         .  ..__%|iiiiiii=>,..\n\
                           _<iIIviiiiiiiiiillli<_.\n\

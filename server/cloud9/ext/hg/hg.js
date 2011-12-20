@@ -4,8 +4,8 @@
  * @copyright 2011, Ajax.org B.V.
  * @license GPLv3 <http://www.gnu.org/licenses/gpl.txt>
  */
-var Plugin = require("cloud9/plugin");
-var Util   = require("cloud9/util");
+var Plugin = require("../../plugin");
+var Util   = require("../../util");
 var sys    = require("sys");
 
 var ShellHgPlugin = module.exports = module.exports = function(ide, workspace) {

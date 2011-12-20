@@ -10,7 +10,7 @@ var fs = require("fs");
 var sys = require("sys");
 var Url = require("url");
 var template = require("./template");
-var Workspace = require("cloud9/workspace");
+var Workspace = require("./workspace");
 var EventEmitter = require("events").EventEmitter;
 var util = require("./util");
 
@@ -153,9 +153,9 @@ Ide.DEFAULT_PLUGINS = [
         else if (path.match(this.workspaceRe)) {
             if (!this.davInited) {
                 if (process.platform == "sunos") {
-                    this.davServer.plugins["codesearch"].GREP_CMD = __dirname+"/../../support/gnu-builds/grep-sunos";
-                    this.davServer.plugins["filesearch"].FIND_CMD = __dirname+"/../../support/gnu-builds/find-sunos";
-                    this.davServer.plugins["filelist"].FIND_CMD = __dirname+"/../../support/gnu-builds/find-sunos";
+                    this.davServer.plugins["codesearch"].GREP_CMD = __dirname+"/../../node_modules/gnu-builds/grep-sunos";
+                    this.davServer.plugins["filesearch"].FIND_CMD = __dirname+"/../../node_modules/gnu-builds/find-sunos";
+                    this.davServer.plugins["filelist"].FIND_CMD = __dirname+"/../../node_modules/gnu-builds/find-sunos";
                 }
                 this.davServer.plugins["permission"] = DavPermission;
                 this.davInited = true;

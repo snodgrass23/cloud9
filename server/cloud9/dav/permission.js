@@ -1,4 +1,4 @@
-var jsDAV_ServerPlugin = require("DAV/plugin").jsDAV_ServerPlugin;
+var jsDAV_ServerPlugin = require("jsdav/lib/DAV/plugin").jsDAV_ServerPlugin;
 var sys = require("sys");
 var Exec = require("child_process").exec;
 

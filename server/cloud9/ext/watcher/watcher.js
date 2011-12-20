@@ -6,7 +6,7 @@
  */
 var fs      = require("fs"),
     sys     = require("sys"),
-    Plugin  = require("cloud9/plugin");
+    Plugin  = require("../../plugin");
    
 var IGNORE_TIMEOUT = 50,
     ignoredPaths = {},

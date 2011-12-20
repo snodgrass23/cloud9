@@ -1,4 +1,4 @@
-var connect = require("connect"),
+var connect = require("connect/lib/connect"),
     error   = require("./error"),
     exec    = require("child_process").exec,
     fs      = require("fs"),

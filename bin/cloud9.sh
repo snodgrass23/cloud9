@@ -2,7 +2,7 @@
 # lets check if we have the submodules initialized
 cd `dirname $0`
 cd ..
-if [ ! -e support/ace/LICENSE ]; then
+if [ ! -e node_modules/ace/LICENSE ]; then
 	echo "--------------------------- Please wait, initializing submodules for first launch ------------------------"
     git submodule update --init --recursive
 	echo "--------------------------- Submodules installed ------------------------"

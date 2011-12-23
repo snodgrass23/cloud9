@@ -14,7 +14,7 @@ Linux*x86_64*)  echo "Linux 64 bit"
 	;;
 
 Linux*i686*)  echo "Linux 32 bit"   
-	support/node-builds-v4/node-linux32 bin/cloud9.js "$@" -a x-www-browser
+	node bin/cloud9.js "$@" -a x-www-browser
 	;;
     
 Darwin*)  echo  "OSX"

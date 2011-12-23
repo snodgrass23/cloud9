@@ -126,7 +126,8 @@ Ide.DEFAULT_PLUGINS = [
     "ext/codecomplete/codecomplete",
     "ext/vim/vim",
     "ext/jslanguage/jslanguage",
-    "ext/autotest/autotest"
+    "ext/autotest/autotest",
+    "ext/tabsessions/tabsessions"
     //"ext/acebugs/acebugs"
 ];
 
@@ -174,7 +175,10 @@ Ide.DEFAULT_PLUGINS = [
             if (err)
                 return next(err);
 
-            res.writeHead(200, {"Content-Type": "text/html"});
+            res.writeHead(200, {
+                "cache-control": "no-transform",
+                "Content-Type": "text/html"
+            });
 
             var permissions = _self.getPermissions(req);
             var plugins = util.arrayToMap(_self.options.plugins);

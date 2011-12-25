@@ -1,7 +1,7 @@
 return;
 
 var fs = require('fs');
-var xml = require("../../support/jsdav/support/node-o3-xml/lib/o3-xml");
+var xml = require("../../node_modules/jsdav/support/node-o3-xml/lib/o3-xml");
 
 var xmlNode = xml.parseFromString(fs.readFileSync(__dirname + "/skins.xml", "utf8")).documentElement;
 var list = {};

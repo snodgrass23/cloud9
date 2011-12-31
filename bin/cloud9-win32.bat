@@ -13,7 +13,7 @@ echo ------ Submodules installed ----
 :skip
 echo ------ Starting Cloud9 server ------
 
-start support\node-builds\win32\node bin/cloud9.js -a "cmd /c start"
+node.exe bin/cloud9.js -a "cmd /c start"
 
 IF %ERRORLEVEL% EQ 0 goto exit
 
@@ -22,3 +22,4 @@ echo "Something failed unfortunately, please try a clean clone"
 pause
 
 :exit
+pause

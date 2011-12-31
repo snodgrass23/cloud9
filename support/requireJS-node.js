@@ -61,18 +61,25 @@ global.define = function (id, injects, factory) {
             var prefix = chunks[0];
             relativeId = chunks.slice(1).join("!")
         }
-            
+        try {    
         if (relativeId.charAt(0) === '.') {
-            var  rootPath       = path.dirname(path.dirname(requireModule.filename)) + "/",
-                 absolutePath   = path.dirname(module.filename) + "/" + relativeId;
+            var  rootPath       = path.dirname(path.dirname(requireModule.filename)).replace(/\\/g,   '/') + "/",
+                 absolutePath   = path.dirname(module.filename).replace(/\\/g,   "/") + "/" + relativeId;
                  
-            relativeId = "../" + absolutePath.match(new RegExp(rootPath + "(.*)"))[1];
+            relativeId = "../" + absolutePath.match(new RegExp((rootPath + "(.*)")))[1];
         }
-        
+		} catch (e){
+			console.warn(new RegExp(rootPath.replace(/\\/g,   '/') + "(.*)","g"));
+			console.warn(absolutePath.match(new RegExp(rootPath.replace(/\\/g,   '/') + "(.*)","g")));
+			console.warn(relativeId,absolutePath,rootPath);
+			console.error(e);
+		}
+		//console.warn(absolutePath.match(new RegExp((rootPath.replace(/\\/g,   '/') + "(.*)"),"g")));
         if (prefix == "text") {
             return fs.readFileSync(findModulePath(relativeId))
         } else
             return require(relativeId);
+
     };
 
     injects.unshift("require", "exports", "module");

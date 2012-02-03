@@ -111,9 +111,8 @@ exports.staticGzip = function(options){
 
         // Check if gzipped static is available
         gzipped(filename, function(err, path, ext){
-            if (err && err.errno === 32) {
+            if (err && err.errno === (process.ENOENT || require("constants").ENOENT)) {
 
-		console.log("not gzipped :" + (err && err.errno));
                 next();
                 // We were looking for a gzipped static,
                 // so lets gzip it!
@@ -121,12 +120,11 @@ exports.staticGzip = function(options){
                     gzip(filename, path, flags, bin);
             }
             else if (err) {
-                next();
+                next(err);
             }
             else {
                 // Re-write the url to serve the gzipped static
                 req.url = (url.pathname + ext).replace(/[^/]+$/, ".$&");
-		console.log("gzipped :" + (err && err.errno));
                 var writeHead = res.writeHead;
                 res.writeHead = function(status, headers){
                     headers = headers || {};

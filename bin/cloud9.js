@@ -5,7 +5,7 @@
  */
 require ("../support/paths");
 
-var Sys = require("sys"),
+var Sys = require("util"),
     Fs  = require("fs"),
     Parser = require("../server/cloud9/optparse");
 

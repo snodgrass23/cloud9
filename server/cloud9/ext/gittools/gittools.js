@@ -6,7 +6,7 @@
  */
 var Plugin = require("../../plugin");
 var Fs     = require("fs");
-var sys    = require("sys");
+var sys    = require("util");
 
 var GitToolsPlugin = module.exports = function(ide) {
     this.ide   = ide;

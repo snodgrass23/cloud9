@@ -4,7 +4,7 @@
  */
 
 var net = require("net");
-var sys = require("sys");
+var sys = require("util");
 var NodeSocket = require("lib-v8debug/lib/v8debug/NodeSocket");
 var ChromeDebugMessageStream = require("lib-v8debug/lib/v8debug/ChromeDebugMessageStream");
 var DevToolsMessage = require("lib-v8debug/lib/v8debug/DevToolsMessage");

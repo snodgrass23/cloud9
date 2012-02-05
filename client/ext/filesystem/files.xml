@@ -513,7 +513,7 @@ $(window).unload(function () {
  <file path="test2" type="file" size="9800" name="fu.js" contenttype="application/javascript; charset=utf-8" creationdate="" lockable="false" hidden="false" executable="false">
   <data><![CDATA[var createServer = require("http").createServer;
 var readFile = require("fs").readFile;
-var sys = require("sys");
+var sys = require("util");
 var url = require("url");
 DEBUG = false;
 
@@ -1022,7 +1022,7 @@ setInterval(function () {
 
 
 var fu = require("./fu"),
-    sys = require("sys"),
+    sys = require("util"),
     url = require("url"),
     qs = require("querystring");
 

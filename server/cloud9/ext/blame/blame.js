@@ -6,7 +6,7 @@
  */
 var Plugin = require("../../plugin");
 var Fs     = require("fs");
-var sys    = require("sys");
+var sys    = require("util");
 
 var BlamePlugin = module.exports = function(ide, workspace) {
     Plugin.call(this, ide, workspace);

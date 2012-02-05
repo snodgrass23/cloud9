@@ -8,7 +8,7 @@ var Plugin = require("../../plugin");
 var Fs     = require("fs");
 var Path   = require("path");
 var Async  = require("asyncjs");
-var sys    = require("sys");
+var sys    = require("util");
 var util   = require("../../util");
 
 var ShellPlugin = module.exports = function(ide, workspace) {

@@ -9,7 +9,7 @@ var Path             = require("path"),
     NodeDebugProxy   = require("./nodedebugproxy"),
     ChromeDebugProxy = require("./chromedebugproxy"),
     Plugin           = require("../../plugin"),
-    sys              = require("sys"),
+    sys              = require("util"),
     netutil          = require("../../netutil");
 
 var NodeRuntimePlugin = module.exports = function(ide, workspace) {

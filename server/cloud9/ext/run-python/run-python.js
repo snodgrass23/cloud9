@@ -7,7 +7,7 @@
 var Path             = require("path"),
     Spawn            = require("child_process").spawn,
     Plugin           = require("../../plugin"),
-    sys              = require("sys"),
+    sys              = require("util"),
     netutil          = require("../../netutil");
 
 var PythonRuntimePlugin = module.exports = function(ide, workspace) {

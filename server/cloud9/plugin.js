@@ -5,7 +5,7 @@
 
 var events = require("events");
 var Spawn  = require("child_process").spawn;
-var sys    = require("sys");
+var sys    = require("util");
 
 var Plugin  = function(ide, workspace) {
     this.ide = ide;

@@ -6,7 +6,7 @@
  */
 var Plugin = require("../../plugin");
 var Util   = require("../../util");
-var sys    = require("sys");
+var sys    = require("util");
 
 var ShellHgPlugin = module.exports = module.exports = function(ide, workspace) {
     Plugin.call(this, ide, workspace);

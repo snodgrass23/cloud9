@@ -5,7 +5,7 @@
  * @license GPLv3 <http://www.gnu.org/licenses/gpl.txt>
  */
 var Plugin = require("../../plugin");
-var sys = require("sys");
+var sys = require("util");
 var util = require("../../util");
 
 var ShellGitPlugin = module.exports = function(ide, workspace) {

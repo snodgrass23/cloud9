@@ -5,7 +5,7 @@
  * @license GPLv3 <http://www.gnu.org/licenses/gpl.txt>
  */
 var fs      = require("fs"),
-    sys     = require("sys"),
+    sys     = require("util"),
     Plugin  = require("../../plugin");
    
 var IGNORE_TIMEOUT = 50,

@@ -7,7 +7,7 @@
 var Plugin = require("../../plugin");
 var Path = require("path");
 var fs = require("fs");
-var sys = require("sys");
+var sys = require("util");
 
 var SettingsPlugin = module.exports = function(ide, workspace) {
     Plugin.call(this, ide, workspace);

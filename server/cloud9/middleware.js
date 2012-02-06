@@ -6,6 +6,10 @@ var connect = require("connect/lib/connect"),
     path    = require("path"),
     utils   = require("connect/lib/connect/utils");
 
+try {
+process.binding("constants");
+} catch(e){}
+
 exports.staticProvider = function (root, mount) {
     var staticGzip = exports.staticGzip({
         root     : path.normalize(root),
@@ -111,7 +115,8 @@ exports.staticGzip = function(options){
 
         // Check if gzipped static is available
         gzipped(filename, function(err, path, ext){
-            if (err && err.errno === (process.ENOENT || require("constants").ENOENT)) {
+            if (err && (err.errno === process.ENOENT || 
+			err.errno === process.ERANGE )) {
 
                 next();
                 // We were looking for a gzipped static,

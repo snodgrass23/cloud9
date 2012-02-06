@@ -5,11 +5,11 @@
 
 require("./requireJS-node");
 
-var defaultResolver = module.constructor._resolveLookupPaths;
+var defaultResolver = module.constructor._resolveFilename;
 
 var Resolves = {"sys":"util"};
 
-module.constructor._resolveLookupPaths = function(request, parent) {
+module.constructor._resolveFilename = function(request, parent) {
     
     if (Resolves[request]){
         return defaultResolver(Resolves[request],parent);

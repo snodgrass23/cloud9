@@ -1,9 +1,6 @@
 [submodule "node_modules/apf"]
 	path = node_modules/apf
 	url = https://github.com/ajaxorg/apf.git
-[submodule "support/node-builds-v4"]
-	path = support/node-builds-v4
-	url = https://github.com/ajaxorg/node-builds-v4.git
 [submodule "node_modules/gnu-builds"]
 	path = node_modules/gnu-builds
 	url = https://github.com/ajaxorg/gnu-builds.git

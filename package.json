@@ -10,6 +10,17 @@
         "type" : "git",
          "url" : "git://github.com/ajaxorg/cloud9.git"
     },
+    "dependencies": {
+        "connect": "1.8.5",
+        "connect-redis": "1.2.0",
+        "async": "0.1.15",
+        "jsDAV": "0.1.1",
+        "lib-v8debug" : "git://github.com/ajaxorg/lib-v8debug.git",
+        "ace":"git://github.com/ajaxorg/ace.git",
+        "socket.io": "git://github.com/ajaxorg/socket.io.git",
+        "socket.io-client": "git://github.com/ajaxorg/socket.io-client.git",
+        "uglify-js":"latest"
+    },
     "bin" : {
         "cloud9" : "./bin/cloud9-npm.js"
     },
@@ -18,3 +29,4 @@
         "url": "http://www.gnu.org/licenses/gpl-3.0.txt"}
     ]
 }
+

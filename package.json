@@ -13,13 +13,12 @@
     "dependencies": {
         "connect": "1.8.5",
         "connect-redis": "1.2.0",
-        "async": "0.1.15",
-        "jsDAV": "0.1.1",
+        "asyncjs": "git://github.com/ajaxorg/async.js.git",
+        "jsdav": "git://github.com/ajaxorg/jsDAV.git",
         "lib-v8debug" : "git://github.com/ajaxorg/lib-v8debug.git",
-        "ace":"git://github.com/ajaxorg/ace.git",
         "socket.io": "git://github.com/ajaxorg/socket.io.git",
         "socket.io-client": "git://github.com/ajaxorg/socket.io-client.git",
-        "uglify-js":"latest"
+        "uglify-js":"git://github.com/ajaxorg/UglifyJS.git"
     },
     "bin" : {
         "cloud9" : "./bin/cloud9-npm.js"

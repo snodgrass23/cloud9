@@ -1,16 +1,19 @@
-var connect = require("connect/lib/connect"),
+var connect = require("connect"),
     error   = require("./error"),
     exec    = require("child_process").exec,
     fs      = require("fs"),
     parse   = require("url").parse,
-    path    = require("path"),
-    utils   = require("connect/lib/connect/utils");
+    path    = require("path");
 
 try {
 process.binding("constants");
 } catch(e){}
 
 exports.staticProvider = function (root, mount) {
+    console.log("***********************");
+    console.log("ROOT:", root);
+    console.log("mount:", mount);
+    console.log("***********************");
     var staticGzip = exports.staticGzip({
         root     : path.normalize(root),
         compress : [
@@ -21,7 +24,7 @@ exports.staticProvider = function (root, mount) {
         ]
     });
 
-    var staticProvider  = connect.staticProvider(path.normalize(root));
+    var staticProvider  = connect.static(path.normalize(root));
 
     return function (request, response, next) {
         var url      = request.url;
@@ -30,7 +33,7 @@ exports.staticProvider = function (root, mount) {
         if (pathname.indexOf(mount) === 0) {
             request.url = url.replace(mount, "") || "/";
             staticGzip(request, response, function (err) {
-                if (err) {
+                if (false && err) {
                     request.url = url;
                     return next(err);
                 }
@@ -107,7 +110,7 @@ exports.staticGzip = function(options){
         // Parse the url
         var url = parse(req.url),
             filename = path.join(root, url.pathname),
-            mime = utils.mime.type(filename).split(';')[0];
+            mime = require('../../support/mime_utils').mime.type(filename).split(';')[0];
 
         // MIME type not white-listed
         if (!~compress.indexOf(mime))

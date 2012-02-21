@@ -16,3 +16,5 @@ aut.js
 helloworld.js
 build/
 .*.gz
+
+node_modules/
